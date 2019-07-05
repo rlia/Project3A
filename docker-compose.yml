@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  opendaylight:
+    build:
+      context: .
+      dockerfile: opendaylight/Dockerfile
+  mininet:
+    build: 
+      context: .
+      dockerfile: mininet/Dockerfile
