@@ -8,6 +8,10 @@ services:
         tty: true
         ports:
             - 8181:8181
+        networks:
+            project3a-network:
+                ipv4_address: 172.20.0.2
+        container_name: open_day_light
 
     mininet:
         build:
@@ -19,7 +23,7 @@ services:
         #    - /tmp/.X11-unix:/tmp/.X11-unix
         #    - /lib/modules:/lib/modules
         tty: true
-        network_mode: "bridge"
+        #network_mode: "bridge"
         privileged: true
         #cap_add:
         #    - SYS_ADMIN
@@ -33,3 +37,16 @@ services:
             - 6633:6633
             - 6640:6640
             - 6653:6653
+        networks:
+            project3a-network:
+                ipv4_address: 172.20.0.33
+        container_name: mininet
+
+networks:
+    project3a-network:
+        driver: bridge
+        ##external: true
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.0.0/16
