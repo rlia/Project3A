@@ -1,0 +1,25 @@
+FROM centos:latest
+
+MAINTAINER Rlia
+
+
+RUN yum install -y epel-release
+RUN yum -y update
+
+RUN yum -y install git
+
+# install openvswitch
+RUN yum install -y centos-release-openstack-ocata
+RUN yum install -y openvswitch
+# install mininet 
+RUN git clone https://github.com/rlia/mininet.git
+RUN pwd
+WORKDIR /mininet
+RUN util/install.sh -nvf
+RUN yum install -y initscripts
+RUN /usr/bin/ovsdb-tool create /etc/openvswitch/conf.db 
+RUN mkdir -pv /var/run/openvswitch/
+RUN ovsdb-server --detach --remote=punix:/var/run/openvswitch/db.sock
+COPY entrypoint.sh /usr/local/bin
+#ENTRYPOINT entrypoint.sh
+

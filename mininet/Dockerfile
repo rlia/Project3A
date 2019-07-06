@@ -1,19 +1,25 @@
-FROM centos:latest
+FROM ubuntu:18.04
 
 MAINTAINER Rlia
 
+USER root
+WORKDIR /root
 
-RUN yum install -y epel-release
-RUN yum -y update
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    iproute2 \
+    iputils-ping \
+    mininet \
+    net-tools \
+    openvswitch-switch \
+    openvswitch-testcontroller \
+    tcpdump \
+    vim \
+    x11-xserver-utils \
+    xterm \
+ && rm -rf /var/lib/apt/lists/* 
+EXPOSE 6633 6653 6640
 
-RUN yum -y install git
-
-# install openvswitch
-RUN yum install -y centos-release-openstack-ocata
-RUN yum install -y openvswitch
-# install mininet 
-RUN git clone https://github.com/rlia/mininet.git
-RUN pwd
-WORKDIR /mininet
-RUN util/install.sh -nf
+COPY ./mininet/entrypoint.sh /usr/local/bin
+ENTRYPOINT entrypoint.sh
 

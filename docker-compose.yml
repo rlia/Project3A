@@ -1,11 +1,35 @@
-version: '3'
-
+version: '3' 
 services:
-  opendaylight:
-    build:
-      context: .
-      dockerfile: opendaylight/Dockerfile
-  mininet:
-    build: 
-      context: .
-      dockerfile: mininet/Dockerfile
+    opendaylight:
+        build:
+            context: .
+            dockerfile: ./opendaylight/Dockerfile 
+        container_name: opendaylight
+        tty: true
+        ports:
+            - 8181:8181
+
+    mininet:
+        build:
+            context: .
+            dockerfile: ./mininet/Dockerfile
+        environment:
+            - DISPLAY
+        #volumes:
+        #    - /tmp/.X11-unix:/tmp/.X11-unix
+        #    - /lib/modules:/lib/modules
+        tty: true
+        network_mode: "bridge"
+        privileged: true
+        #cap_add:
+        #    - SYS_ADMIN
+        ##security_opt:
+        #   - seccomp:unconfined
+        #volumes:
+        #    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        entrypoint: entrypoint.sh
+        container_name: mininet
+        ports:
+            - 6633:6633
+            - 6640:6640
+            - 6653:6653

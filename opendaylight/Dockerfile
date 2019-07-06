@@ -16,5 +16,5 @@ EXPOSE 8181
 
 RUN /opt/opendaylight/bin/start; /opt/opendaylight/bin/client -r 7 "feature:install odl-dlux-core odl-dluxapps-nodes odl-dluxapps-topology odl-dluxapps-yangui odl-dluxapps-yangvisualizer odl-dluxapps-yangman"
 
-COPY entrypoint.sh /usr/local/bin
+COPY ./opendaylight/entrypoint.sh /usr/local/bin
 ENTRYPOINT entrypoint.sh
