@@ -19,11 +19,10 @@ services:
             dockerfile: ./mininet/Dockerfile
         environment:
             - DISPLAY
-        #volumes:
-        #    - /tmp/.X11-unix:/tmp/.X11-unix
-        #    - /lib/modules:/lib/modules
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /lib/modules:/lib/modules
         tty: true
-        #network_mode: "bridge"
         privileged: true
         #cap_add:
         #    - SYS_ADMIN
@@ -33,13 +32,13 @@ services:
         #    - /sys/fs/cgroup:/sys/fs/cgroup:ro
         entrypoint: entrypoint.sh
         container_name: mininet
-        ports:
-            - 6633:6633
-            - 6640:6640
-            - 6653:6653
+        #ports:
+        #    - 6633:6633
+        #    - 6640:6640
+        #    - 6653:6653
         networks:
             project3a-network:
-                ipv4_address: 172.20.0.33
+                ipv4_address: 172.20.0.3
         container_name: mininet
 
 networks:
