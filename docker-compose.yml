@@ -42,6 +42,33 @@ services:
         container_name: mininet
         depends_on:
             - opendaylight
+    rtmp:
+        container_name: rtmp_server
+        build:
+            context: .
+            dockerfile ./nginx_rtmp/Dockerfile
+        ports:
+            - 1935:1935
+        volumes:
+            - /var/container/data:/data
+            - /var/container/log/rtmp/nginx/:/var/log/nginx
+        networks:
+            project3a-network:
+                ipv4_address: 172.20.0.4
+
+    stream:
+        container_name: stream_server
+        build: ./streaming_host/container/nginx_stream
+            context: .
+            dockerfile: ./nginx_stream/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - /var/container/data:/data
+            - /var/container/log/stream/nginx/:/var/log/nginx
+        networks:
+            project3a-network:
+                ipv4_address: 172.20.0.5
 networks:
     project3a-network:
         driver: bridge

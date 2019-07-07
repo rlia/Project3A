@@ -1,0 +1,30 @@
+worker_processes 1;
+error_log  logs/error.log error;
+
+events {
+    worker_connections 1024;
+}
+
+rtmp {
+        server {
+                listen 1935;
+                allow play all;
+                application encorder {
+                        live on;
+                        exec ffmpeg -i rtmp://localhost/$app/$name -async 1 -vsync cfr
+                                -acodec copy -c:v libx264 -b:v 128K -f flv rtmp://localhost/live2/$name_low
+                                -acodec copy -c:v libx264 -b:v 512k -f flv rtmp://localhost/live2/$name_mid
+                                -acodec copy -c:v libx264 -b:v 1024k -f flv rtmp://localhost/live2/$name_high;
+                }
+
+                application hls {
+                        live on;
+                        hls on;
+                        hls_path /data/hls;
+                        hls_variant _low  BANDWIDTH=300000;
+                        hls_variant _mid BANDWIDTH=700000;
+                        hls_variant _high BANDWIDTH=1200000;
+                }
+
+        }
+}
