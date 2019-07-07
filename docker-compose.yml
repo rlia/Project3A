@@ -46,7 +46,7 @@ services:
         container_name: rtmp_server
         build:
             context: .
-            dockerfile ./nginx_rtmp/Dockerfile
+            dockerfile: ./nginx_rtmp/Dockerfile
         ports:
             - 1935:1935
         volumes:
@@ -58,7 +58,7 @@ services:
 
     stream:
         container_name: stream_server
-        build: ./streaming_host/container/nginx_stream
+        build:
             context: .
             dockerfile: ./nginx_stream/Dockerfile
         ports:
