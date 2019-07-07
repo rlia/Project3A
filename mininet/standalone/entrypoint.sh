@@ -1,5 +1,5 @@
 #!/usr/bin/env /bin/bash
-sleep 30
+
 service openvswitch-switch start
 ovs-vsctl set-manager ptcp:6640
 #mn --controller=remote,ip=172.20.0.2 --switch=ovsk,protocols=OpenFlow13

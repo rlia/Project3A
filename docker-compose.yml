@@ -40,7 +40,8 @@ services:
             project3a-network:
                 ipv4_address: 172.20.0.3
         container_name: mininet
-
+        depends_on:
+            - opendaylight
 networks:
     project3a-network:
         driver: bridge
