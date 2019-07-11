@@ -14,7 +14,7 @@ RUN yum -y install opendaylight-8.1.0-1.el7.noarch.rpm
 
 EXPOSE 8181
 EXPOSE 6653
-RUN /opt/opendaylight/bin/start; /opt/opendaylight/bin/client -r 7 "feature:install odl-dlux-core odl-dluxapps-nodes odl-dluxapps-topology odl-dluxapps-yangui odl-dluxapps-yangvisualizer odl-dluxapps-yangman odl-l2switch-switch"
+RUN /opt/opendaylight/bin/start; /opt/opendaylight/bin/client -r 7 "feature:install odl-dlux-core odl-dluxapps-nodes odl-dluxapps-topology odl-dluxapps-yangui odl-dluxapps-yangvisualizer odl-dluxapps-yangman odl-l2switch-switch odl-mdsal-apidocs odl-l2switch-hosttracker"
 
 COPY ./opendaylight/entrypoint.sh /usr/local/bin
 ENTRYPOINT entrypoint.sh
