@@ -10,17 +10,17 @@ ifconfig ovs-br1 172.21.0.11 netmask 255.255.255.0 up
 ovs-vsctl add-br ovs-br2
 ovs-vsctl set bridge ovs-br2 protocols=OpenFlow13
 ovs-vsctl set-controller ovs-br2 tcp:172.21.0.2
-ifconfig ovs-br1 172.21.0.12 netmask 255.255.255.0 up
+ifconfig ovs-br2 172.21.0.12 netmask 255.255.255.0 up
 
 ovs-vsctl add-br ovs-br3
 ovs-vsctl set bridge ovs-br3 protocols=OpenFlow13
 ovs-vsctl set-controller ovs-br3 tcp:172.21.0.2
-ifconfig ovs-br1 172.21.0.13 netmask 255.255.255.0 up
+ifconfig ovs-br3 172.21.0.13 netmask 255.255.255.0 up
 
 ovs-vsctl add-br ovs-br4
 ovs-vsctl set bridge ovs-br4 protocols=OpenFlow13
 ovs-vsctl set-controller ovs-br4 tcp:172.21.0.2
-ifconfig ovs-br1 172.21.0.14 netmask 255.255.255.0 up
+ifconfig ovs-br4 172.21.0.14 netmask 255.255.255.0 up
 
 
 ovs-vsctl add-port ovs-br1 patch1-2 -- set interface patch1-2 type=patch options:peer=patch2-1
